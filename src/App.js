@@ -8,7 +8,11 @@ export default function App() {
       <h1>Weather App</h1>
       <footer>
         This project was coded by{" "}
-        <a href="" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://www.behance.net/fotinia_sadovskaya"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Svitlana Voronko
         </a>{" "}
         and is{" "}
@@ -20,11 +24,7 @@ export default function App() {
           open-sourced on GitHub
         </a>{" "}
         and{" "}
-        <a
-          href=""
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href="" target="_blank" rel="noopener noreferrer">
           hosted on Netlify
         </a>
       </footer>
