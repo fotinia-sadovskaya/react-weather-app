@@ -68,8 +68,8 @@ export default function Weather(props) {
       </div>
     );
   } else {
-    const apiKey = "743bee57fddbfaf52447193a87d5dd25";
-    let city = "Burgas";
+    let apiKey = "a95c2c6739994ba4903e007ee817e7d1";
+    let defaultCity = "Burgas";
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.defaultCity}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(handleResponse);
 
