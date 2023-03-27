@@ -60,7 +60,7 @@
   width: 64px;
   height:64px;
   position: relative;
-  top: 10px;
+  top: 3px;
   left: 10px;
   margin-right: 15px;
   display: inline-block;
@@ -69,11 +69,6 @@
   font-size: 64px;
   font-weight: 500;
   line-height: 64px;
-}
-
-.Weather .weather-date {
-  position: relative;
-  top: 25px;
 }
 
 .Weather .unit {
