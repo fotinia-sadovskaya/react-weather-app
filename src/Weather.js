@@ -20,21 +20,19 @@ export default function Weather(props) {
     });
   }
 
-  function search() {
-    let apiKey = "a95c2c6739994ba4903e007ee817e7d1";
-    let defaultCity = "Burgas";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-    axios.get(apiUrl).then(handleResponse);
-  }
-
   function handleSubmit(event) {
     event.preventDefault();
     search();
-    // search for a city
   }
 
   function handleCityChange(event) {
     setCity(event.target.value);
+  }
+
+  function search() {
+    let apiKey = "a95c2c6739994ba4903e007ee817e7d1";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(handleResponse);
   }
 
   if (weatherData.ready) {
