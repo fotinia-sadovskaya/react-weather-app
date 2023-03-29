@@ -1,0 +1,11 @@
+body::before {
+    content: '';
+    position: fixed; 
+    left: 0;
+    right: 0; 
+    top: 0;
+    bottom: 0; 
+    z-index: -1;
+    background: url(https://s3.amazonaws.com/shecodesio-production/uploads/files/000/073/974/original/photo_2022-07-17_16-47-52.jpg?1680029523) center / cover no-repeat;
+    filter: blur(3px);
+   }

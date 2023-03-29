@@ -1,7 +1,7 @@
 .Weather {
-  background-image: linear-gradient(0deg, #a6c1ee 0, #fbc2eb);
-  border: 1px solid #17a2b8;
-  border-radius: 12px;
+  background: linear-gradient(0deg, #a6c0ee 0, #fbc2ebb9);
+  border: 1px solid #17a3b87a;
+  border-radius: 8px;
   font-family: sans-serif, Roboto;
   padding: 16px;
   color: #17a2b8;
@@ -34,7 +34,7 @@
   height: 44px;
   outline: 0;
   padding: 10px;
-  border-radius: 10px !important;
+  border-radius: 8px !important;
   transition: all 200ms ease-in-out;
 }
 
@@ -48,17 +48,15 @@
 }
 
 .Weather input:hover {
-  border: 1px solid #17a2b8;
+  border: 1px solid #17a3b87a;
 }
 
 .Weather .form-control:focus {
-  border-color: #17a2b8;
+  border-color: #17a3b87a;
   box-shadow: none;
 }
 
 .Weather canvas {
-  width: 64px;
-  height:64px;
   position: relative;
   top: 3px;
   left: 10px;
