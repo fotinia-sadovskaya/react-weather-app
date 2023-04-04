@@ -2,7 +2,7 @@
   background: linear-gradient(0deg, #a6c0ee 0, #fbc2ebb9);
   border: 1px solid #17a3b87a;
   border-radius: 8px;
-  font-family: "Prompt", sans-serif;
+  font-family: "IBM Plex Mono", monospace;
   padding: 16px;
   color: #17a2b8;
 }
@@ -78,11 +78,10 @@
 }
 
 @media (max-width: 576px) {
-
-.Weather {
-  background: linear-gradient(0deg, #a6c0ee 0, #fbc2eb);
-  font-weight: 400;
-}
+  .Weather {
+    background: linear-gradient(0deg, #a6c0ee 0, #fbc2eb);
+    font-weight: 400;
+  }
 
   .Weather .WeatherInfo {
     text-align: center;
