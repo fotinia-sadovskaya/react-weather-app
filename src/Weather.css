@@ -8,7 +8,7 @@
 }
 
 .Weather h1 {
-  font-size: 26px;
+  font-size: 32px;
   font-weight: 500;
   line-height: 1.5;
   margin: 20px 0 0 0;
@@ -75,4 +75,34 @@
   font-weight: 400;
   position: relative;
   top: -34px;
+}
+
+@media (max-width: 576px) {
+
+.Weather {
+  background: linear-gradient(0deg, #a6c0ee 0, #fbc2eb);
+}
+
+  .Weather .WeatherInfo {
+    text-align: center;
+  }
+
+  .Weather h1 {
+    font-size: 54px;
+  }
+
+  .Weather li {
+    font-size: 22px;
+    line-height: 1.2;
+  }
+
+  .Weather canvas {
+    width: 72px;
+    height: 72px;
+  }
+
+  .Weather .WeatherForecast {
+    font-size: 22px;
+    font-weight: 100;
+  }
 }
