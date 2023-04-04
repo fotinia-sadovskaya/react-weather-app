@@ -81,7 +81,6 @@
 
 .Weather {
   background: linear-gradient(0deg, #a6c0ee 0, #fbc2eb);
-  font-weight: 400;
 }
 
   .Weather .WeatherInfo {
@@ -104,6 +103,6 @@
 
   .Weather .WeatherForecast {
     font-size: 22px;
-    font-weight: 100;
+    font-weight: 500;
   }
 }
