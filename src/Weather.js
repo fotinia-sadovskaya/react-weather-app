@@ -16,7 +16,7 @@ export default function Weather(props) {
       humidity: response.data.main.humidity,
       date: new Date(response.data.dt * 1000),
       description: response.data.weather[0].description,
-      iconUrl: response.data.condition.icon_url,
+      icon: response.data.weather[0].icon,
       wind: response.data.wind.speed,
       city: response.data.name,
       feel: response.data.main.feels_like,
@@ -34,8 +34,8 @@ export default function Weather(props) {
   }
 
   function search() {
-    let apiKey = "1c0f6e49a911db65307b85186bd4t6oe";
-    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+    let apiKey = "a95c2c6739994ba4903e007ee817e7d1";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(handleResponse);
   }
 
@@ -53,7 +53,7 @@ export default function Weather(props) {
                 onChange={handleCityChange}
               />
             </div>
-            <div className="col-sm-3 mb-3">
+            <div className="col-3 mb-3">
               <input
                 type="Submit"
                 value="Search"
