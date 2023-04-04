@@ -103,10 +103,9 @@
 
   .Weather .WeatherForecast {
     font-size: 22px;
-    font-weight: 500;
   }
 
   .Weather .WeatherForecast-day {
-    font-weight: 600;
+    font-weight: 700;
   }
 }
