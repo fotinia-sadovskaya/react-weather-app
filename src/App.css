@@ -19,3 +19,9 @@ a:hover {
   color: #17a2b8;
   text-decoration: underline;
 }
+
+
+@media (max-width: 576px) {
+  .App {
+   margin: 10px auto;
+}
