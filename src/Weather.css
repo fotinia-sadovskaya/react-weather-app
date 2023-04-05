@@ -80,7 +80,6 @@
 @media (max-width: 576px) {
   .Weather {
     background: linear-gradient(0deg, #a6c0ee 0, #fbc2eb);
-    font-family: "IBM Plex Mono", monospace;
     font-weight: 400;
   }
 
