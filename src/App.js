@@ -7,7 +7,7 @@ export default function App() {
   return (
     <div className="App">
       <div className="container">
-        <Weather defaultCity="Burgas" />
+        <Weather defaultCity={props.data.city} />
         <Footer />
       </div>
     </div>
