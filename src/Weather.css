@@ -78,6 +78,15 @@
   top: -34px;
 }
 
+.Weather .smaller {
+  font-size: 22px;
+  position: relative;
+  top: -10px;
+  background-color: #fcd720;
+  border-radius: 30px;
+  transition: all 200ms ease-in-out;
+}
+
 @media (max-width: 576px) {
   .Weather {
     background: linear-gradient(0deg, #a6c0ee 0, #fbc2eb);

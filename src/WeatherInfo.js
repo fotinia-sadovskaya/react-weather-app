@@ -7,7 +7,7 @@ export default function WeatherInfo(props) {
   return (
     <div className="WeatherInfo">
       <h1>
-        {props.data.city}, {props.data.country}
+        {props.data.city}, <span className="smaller">{props.data.country}</span>
       </h1>
       <ul>
         <li>
