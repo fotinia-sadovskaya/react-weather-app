@@ -10,7 +10,7 @@ export default function Footer() {
           rel="noopener noreferrer"
         >
           Svitlana Voronko
-        </a>{" "}
+        // </a>{" "}
         // and is{" "}
         // <a
         //   href="https://github.com/fotinia-sadovskaya/react-weather-app"
@@ -26,7 +26,7 @@ export default function Footer() {
         //   rel="noopener noreferrer"
         // >
         //   hosted on Netlify
-        // </a>
+        </a>
       </footer>
     );
 }
