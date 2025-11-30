@@ -22,7 +22,7 @@ export default function Weather(props) {
       icon: response.data.weather[0].icon,
       wind: response.data.wind.speed,
       city: response.data.name,
-      feelsLike: response.data.main.feels_like,
+      feel: response.data.main.feels_like,
       country: response.data.sys.country,
     });
   }
