@@ -36,7 +36,7 @@ export default function Weather(props) {
   }
 
   function search() {
-    let apiKey = "e947cb2640f1db92e6a19005bc43b435";
+    let apiKey = "583543d42b8605a7c28a20d072be705c";
     let units = "metric";
     let apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
     axios.get(apiUrl).then(handleResponse);
@@ -47,7 +47,7 @@ export default function Weather(props) {
     let currentLatitude = position.coords.latitude;
     let currentLongitude = position.coords.longitude;
     let units = "metric";
-    let apiKey = "e947cb2640f1db92e6a19005bc43b435";
+    let apiKey = "583543d42b8605a7c28a20d072be705c";
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${currentLatitude}&lon=${currentLongitude}&appid=${apiKey}&units=${units}`;
     axios.get(apiUrl).then(handleResponse);
   }
