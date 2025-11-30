@@ -4,6 +4,7 @@ import WeatherInfo from "./WeatherInfo";
 import WeatherForecast from "./WeatherForecast";
 import axios from "axios";
 import "./Weather.css";
+import LoadingSpinner from "./LoadingSpinner"; // новий компонент
 
 export default function Weather(props) {
   const [weatherData, setWeatherData] = useState({ loaded: false });
@@ -21,7 +22,7 @@ export default function Weather(props) {
       icon: response.data.weather[0].icon,
       wind: response.data.wind.speed,
       city: response.data.name,
-      feel: response.data.main.feels_like || null,
+      feelsLike: response.data.main.feels_like,
       country: response.data.sys.country,
     });
   }
@@ -44,20 +45,9 @@ export default function Weather(props) {
     });
   }
 
-  // function showLocation(position) {
-  //   const currentLatitude = position.coords.latitude;
-  //   const currentLongitude = position.coords.longitude;
-  //   const apiKey = "583543d42b8605a7c28a20d072be705c";
-  //   const units = "metric";
-  //   const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${currentLatitude}&lon=${currentLongitude}&appid=${apiKey}&units=${units}`;
-  //   axios.get(apiUrl).then(handleResponse).catch((error) => {
-  //     console.error("Location API error:", error);
-  //   });
-  // }
-
   if (weatherData.loaded) {
     return (
-      <div className="Weather">
+      <div className="Weather fade-in">
         <form onSubmit={handleSubmit}>
           <div className="row">
             <div className="col-sm-9 mb-3">
@@ -89,6 +79,6 @@ export default function Weather(props) {
     );
   } else {
     search();
-    return <div className="loading-screen">Loading...</div>;
+    return <LoadingSpinner />;
   }
 }

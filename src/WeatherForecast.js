@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import "./WeatherForecast.css";
 import axios from "axios";
 import WeatherForecastDay from "./WeatherForecastDay";
+import LoadingSpinner from "./LoadingSpinner"; // новий компонент
 
 export default function WeatherForecast(props) {
   const [loaded, setLoaded] = useState(false);
@@ -42,14 +43,13 @@ export default function WeatherForecast(props) {
 
           const dailyForecasts = Object.keys(grouped).map((dayKey) => {
             const dayData = grouped[dayKey];
-
             return {
               dt: dayData.dt,
               main: {
                 temp_max: Math.max(...dayData.tempsMax),
                 temp_min: Math.min(...dayData.tempsMin),
               },
-              weather: [dayData.weatherIcons[0]], // можна вдосконалити: брати найчастіший стан
+              weather: [dayData.weatherIcons[0]],
             };
           });
 
@@ -65,7 +65,7 @@ export default function WeatherForecast(props) {
 
   if (loaded && forecast.length > 0) {
     return (
-      <div className="WeatherForecast">
+      <div className="WeatherForecast fade-in">
         <div className="row">
           {forecast.map((dailyForecast, index) => (
             <div className="col-sm mt-2 mb-4" key={index}>
@@ -80,6 +80,6 @@ export default function WeatherForecast(props) {
       </div>
     );
   } else {
-    return <div className="loading-forecast">Loading forecast...</div>;
+    return <LoadingSpinner />;
   }
 }
