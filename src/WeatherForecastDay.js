@@ -31,14 +31,16 @@ export default function WeatherForecastDay(props) {
       <div className="WeatherForecast-temperatures">
         <span className="WeatherForecast-temperature-max">
           {maxTemperature()}
-        </span>{" "}
+        </span>
+        <span className="WeatherForecast-separator"> | </span>
         <span className="WeatherForecast-temperature-min">
           {minTemperature()}
         </span>
         <span className="WeatherForecast-unit">
-          {props.unit === "celsius" ? "°C" : "°F"}
+          {props.unit === "celsius" ? "C" : "F"}
         </span>
       </div>
+
     </div>
   );
 }

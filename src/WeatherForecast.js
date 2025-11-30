@@ -20,22 +20,40 @@ export default function WeatherForecast(props) {
       axios
         .get(apiUrl)
         .then((response) => {
-          // API повертає список прогнозів кожні 3 години
-          // Групуємо їх по днях (беремо перший запис кожного дня)
-          const dailyForecasts = [];
-          const seenDates = new Set();
+          const grouped = {};
 
           response.data.list.forEach((item) => {
             const date = new Date(item.dt * 1000);
-            const day = date.toDateString();
+            const dayKey = date.toDateString();
 
-            if (!seenDates.has(day)) {
-              seenDates.add(day);
-              dailyForecasts.push(item);
+            if (!grouped[dayKey]) {
+              grouped[dayKey] = {
+                tempsMax: [],
+                tempsMin: [],
+                weatherIcons: [],
+                dt: item.dt,
+              };
             }
+
+            grouped[dayKey].tempsMax.push(item.main.temp_max);
+            grouped[dayKey].tempsMin.push(item.main.temp_min);
+            grouped[dayKey].weatherIcons.push(item.weather[0]);
           });
 
-          setForecast(dailyForecasts.slice(0, 5)); // тільки 5 днів
+          const dailyForecasts = Object.keys(grouped).map((dayKey) => {
+            const dayData = grouped[dayKey];
+
+            return {
+              dt: dayData.dt,
+              main: {
+                temp_max: Math.max(...dayData.tempsMax),
+                temp_min: Math.min(...dayData.tempsMin),
+              },
+              weather: [dayData.weatherIcons[0]], // можна вдосконалити: брати найчастіший стан
+            };
+          });
+
+          setForecast(dailyForecasts.slice(0, 5));
           setLoaded(true);
         })
         .catch((error) => {
