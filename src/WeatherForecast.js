@@ -8,8 +8,11 @@ export default function WeatherForecast(props) {
   let [forecast, setForecast] = useState(null);
 
   useEffect(() => {
-    setLoaded(false);
-  }, [props.coordinates]);
+    if (props.coordinates) {
+      setLoaded(false);
+      load();
+    }
+  }, [props.coordinates, props.unit]);
 
   function handleResponse(response) {
     console.log(response.data);
@@ -18,15 +21,22 @@ export default function WeatherForecast(props) {
   }
 
   function load() {
-    let longitude = props.coordinates.lon;
-    let latitude = props.coordinates.lat;
-    let apiKey = "e947cb2640f1db92e6a19005bc43b435";
-    let units = "metric";
-    let apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
-    axios.get(apiUrl).then(handleResponse);
+    const longitude = props.coordinates.lon;
+    const latitude = props.coordinates.lat;
+    const apiKey = "e947cb2640f1db92e6a19005bc43b435";
+    const units = "metric";
+    const apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
+
+    axios
+      .get(apiUrl)
+      .then(handleResponse)
+      .catch((error) => {
+        console.error("Forecast API error:", error);
+        setLoaded(false);
+      });
   }
 
-  if (loaded) {
+  if (loaded && forecast) {
     console.log(forecast);
     return (
       <div className="WeatherForecast">
@@ -46,7 +56,6 @@ export default function WeatherForecast(props) {
       </div>
     );
   } else {
-    load();
 
     return "loading...";
   }
