@@ -6,7 +6,7 @@ import WeatherForecastDay from "./WeatherForecastDay";
 
 export default function WeatherForecast(props) {
   const [loaded, setLoaded] = useState(false);
-  const [forecast, setForecast] = useState(null);
+  const [forecast, setForecast] = useState([]);
 
   useEffect(() => {
     if (props.coordinates && props.coordinates.lat && props.coordinates.lon) {
@@ -20,8 +20,22 @@ export default function WeatherForecast(props) {
       axios
         .get(apiUrl)
         .then((response) => {
-          console.log("Forecast array:", response.data.daily);
-          setForecast(response.data.daily);
+          // API повертає список прогнозів кожні 3 години
+          // Групуємо їх по днях (беремо перший запис кожного дня)
+          const dailyForecasts = [];
+          const seenDates = new Set();
+
+          response.data.list.forEach((item) => {
+            const date = new Date(item.dt * 1000);
+            const day = date.toDateString();
+
+            if (!seenDates.has(day)) {
+              seenDates.add(day);
+              dailyForecasts.push(item);
+            }
+          });
+
+          setForecast(dailyForecasts.slice(0, 5)); // тільки 5 днів
           setLoaded(true);
         })
         .catch((error) => {
@@ -31,25 +45,19 @@ export default function WeatherForecast(props) {
     }
   }, [props.coordinates]);
 
-  if (loaded && forecast) {
+  if (loaded && forecast.length > 0) {
     return (
       <div className="WeatherForecast">
         <div className="row">
-          {forecast.map((dailyForecast, index) => {
-            if (index < 5) {
-              return (
-                <div className="col-sm mt-2 mb-4" key={index}>
-                  <WeatherForecastDay
-                    data={dailyForecast}
-                    unit={props.unit}
-                    setUnit={props.setUnit}
-                  />
-                </div>
-              );
-            } else {
-              return null;
-            }
-          })}
+          {forecast.map((dailyForecast, index) => (
+            <div className="col-sm mt-2 mb-4" key={index}>
+              <WeatherForecastDay
+                data={dailyForecast}
+                unit={props.unit}
+                setUnit={props.setUnit}
+              />
+            </div>
+          ))}
         </div>
       </div>
     );
