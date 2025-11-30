@@ -1,3 +1,4 @@
+// src/Weather.js
 import React, { useState } from "react";
 import WeatherInfo from "./WeatherInfo";
 import WeatherForecast from "./WeatherForecast";
@@ -10,7 +11,6 @@ export default function Weather(props) {
   const [unit, setUnit] = useState("celsius");
 
   function handleResponse(response) {
-    console.log(response.data);
     setWeatherData({
       loaded: true,
       coordinates: response.data.coord,
@@ -36,20 +36,23 @@ export default function Weather(props) {
   }
 
   function search() {
-    let apiKey = "583543d42b8605a7c28a20d072be705c";
-    let units = "metric";
-    let apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
-    axios.get(apiUrl).then(handleResponse);
+    const apiKey = "583543d42b8605a7c28a20d072be705c";
+    const units = "metric";
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
+    axios.get(apiUrl).then(handleResponse).catch((error) => {
+      console.error("Weather API error:", error);
+    });
   }
 
   function showLocation(position) {
-    console.log(position.coords.latitude, position.coords.longitude);
-    let currentLatitude = position.coords.latitude;
-    let currentLongitude = position.coords.longitude;
-    let units = "metric";
-    let apiKey = "583543d42b8605a7c28a20d072be705c";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${currentLatitude}&lon=${currentLongitude}&appid=${apiKey}&units=${units}`;
-    axios.get(apiUrl).then(handleResponse);
+    const currentLatitude = position.coords.latitude;
+    const currentLongitude = position.coords.longitude;
+    const apiKey = "583543d42b8605a7c28a20d072be705c";
+    const units = "metric";
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${currentLatitude}&lon=${currentLongitude}&appid=${apiKey}&units=${units}`;
+    axios.get(apiUrl).then(handleResponse).catch((error) => {
+      console.error("Location API error:", error);
+    });
   }
 
   if (weatherData.loaded) {
@@ -62,13 +65,13 @@ export default function Weather(props) {
                 type="search"
                 placeholder="Enter a city.."
                 className="form-control"
-                autoFocus="on"
+                autoFocus
                 onChange={handleCityChange}
               />
             </div>
             <div className="col-sm-3 mb-3">
               <input
-                type="Submit"
+                type="submit"
                 value="Search"
                 className="btn btn-info w-100"
               />
@@ -77,11 +80,15 @@ export default function Weather(props) {
         </form>
         <WeatherInfo data={weatherData} unit={unit} setUnit={setUnit} />
         <hr />
-        <WeatherForecast coordinates={weatherData.coordinates} unit={unit} setUnit={setUnit} />
+        <WeatherForecast
+          coordinates={weatherData.coordinates}
+          unit={unit}
+          setUnit={setUnit}
+        />
       </div>
     );
   } else {
     search();
-    return "Loading...";
+    return <div className="loading-screen">Loading...</div>;
   }
 }
