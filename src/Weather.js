@@ -39,18 +39,18 @@ export default function Weather(props) {
     setCity(event.target.value);
   }
 
-  // function search() {
-  //   let apiKey = "8f0fc91db3aoa04a9t8419fe6b4378f88";
-  //   let units = "metric";
-  //   let apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
-  //   axios.get(apiUrl).then(handleResponse);
-  // }
-
   function search() {
-    const apiKey = "f0fc91db3aoa04a9t8419fe6b4378f88";
-    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+    let apiKey = "e947cb2640f1db92e6a19005bc43b435";
+    let units = "metric";
+    let apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
     axios.get(apiUrl).then(handleResponse);
   }
+
+  // function search() {
+  //   const apiKey = "f0fc91db3aoa04a9t8419fe6b4378f88";
+  //   let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+  //   axios.get(apiUrl).then(handleResponse);
+  // }
 
   if (weatherData.ready) {
     return (
