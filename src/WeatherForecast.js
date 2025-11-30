@@ -12,6 +12,7 @@ export default function WeatherForecast(props) {
   }, [props.coordinates]);
 
   function handleResponse(response) {
+    console.log(response.data);
     setForecast(response.data.daily);
     setLoaded(true);
   }
@@ -26,14 +27,15 @@ export default function WeatherForecast(props) {
   }
 
   if (loaded) {
+    console.log(forecast);
     return (
       <div className="WeatherForecast">
         <div className="row">
           {forecast.map(function (dailyForecast, index) {
-            if (index < 5) {
+            if (index > 0 && index < 5) {
               return (
                 <div className="col-sm mt-2 mb-4" key={index}>
-                  <WeatherForecastDay data={dailyForecast} />
+                  <WeatherForecastDay data={dailyForecast} unit={props.unit} setUnit={props.setUnit} />
                 </div>
               );
             } else {
@@ -46,6 +48,6 @@ export default function WeatherForecast(props) {
   } else {
     load();
 
-    return null;
+    return "loading...";
   }
 }

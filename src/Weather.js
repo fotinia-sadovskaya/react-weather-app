@@ -5,12 +5,14 @@ import axios from "axios";
 import "./Weather.css";
 
 export default function Weather(props) {
-  const [weatherData, setWeatherData] = useState({ ready: false });
+  const [weatherData, setWeatherData] = useState({ loaded: false });
   const [city, setCity] = useState(props.defaultCity);
+  const [unit, setUnit] = useState("celsius");
 
   function handleResponse(response) {
+    console.log(response.data);
     setWeatherData({
-      ready: true,
+      loaded: true,
       coordinates: response.data.coord,
       temperature: response.data.main.temp,
       humidity: response.data.main.humidity,
@@ -19,7 +21,7 @@ export default function Weather(props) {
       icon: response.data.weather[0].icon,
       wind: response.data.wind.speed,
       city: response.data.name,
-      feel: response.data.main.feels_like,
+      feelsLike: response.data.main.feels_like,
       country: response.data.sys.country,
     });
   }
@@ -40,7 +42,17 @@ export default function Weather(props) {
     axios.get(apiUrl).then(handleResponse);
   }
 
-  if (weatherData.ready) {
+  function showLocation(position) {
+    console.log(position.coords.latitude, position.coords.longitude);
+    let currentLatitude = position.coords.latitude;
+    let currentLongitude = position.coords.longitude;
+    let units = "metric";
+    let apiKey = "e947cb2640f1db92e6a19005bc43b435";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${currentLatitude}&lon=${currentLongitude}&appid=${apiKey}&units=${units}`;
+    axios.get(apiUrl).then(handleResponse);
+  }
+
+  if (weatherData.loaded) {
     return (
       <div className="Weather">
         <form onSubmit={handleSubmit}>
@@ -63,9 +75,9 @@ export default function Weather(props) {
             </div>
           </div>
         </form>
-        <WeatherInfo data={weatherData} />
+        <WeatherInfo data={weatherData} unit={unit} setUnit={setUnit} />
         <hr />
-        <WeatherForecast coordinates={weatherData.coordinates} />
+        <WeatherForecast coordinates={weatherData.coordinates} unit={unit} setUnit={setUnit} />
       </div>
     );
   } else {
