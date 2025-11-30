@@ -44,16 +44,16 @@ export default function Weather(props) {
     });
   }
 
-  function showLocation(position) {
-    const currentLatitude = position.coords.latitude;
-    const currentLongitude = position.coords.longitude;
-    const apiKey = "583543d42b8605a7c28a20d072be705c";
-    const units = "metric";
-    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${currentLatitude}&lon=${currentLongitude}&appid=${apiKey}&units=${units}`;
-    axios.get(apiUrl).then(handleResponse).catch((error) => {
-      console.error("Location API error:", error);
-    });
-  }
+  // function showLocation(position) {
+  //   const currentLatitude = position.coords.latitude;
+  //   const currentLongitude = position.coords.longitude;
+  //   const apiKey = "583543d42b8605a7c28a20d072be705c";
+  //   const units = "metric";
+  //   const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${currentLatitude}&lon=${currentLongitude}&appid=${apiKey}&units=${units}`;
+  //   axios.get(apiUrl).then(handleResponse).catch((error) => {
+  //     console.error("Location API error:", error);
+  //   });
+  // }
 
   if (weatherData.loaded) {
     return (
