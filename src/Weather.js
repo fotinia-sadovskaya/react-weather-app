@@ -24,15 +24,15 @@ export default function Weather(props) {
     });
   }
 
-  // function handleSubmit(event) {
-  //   event.preventDefault();
-  //   search();
-  // }
-
-    function handleSubmit(event) {
+  function handleSubmit(event) {
     event.preventDefault();
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=20b53919a21c5e6c903732f960015f82&units=metric`;
-    axios.get(apiUrl).then(displayWeather);
+    search();
+  }
+
+    // function handleSubmit(event) {
+    // event.preventDefault();
+    // let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=20b53919a21c5e6c903732f960015f82&units=metric`;
+    // axios.get(apiUrl).then(displayWeather);
   }
 
   function handleCityChange(event) {
@@ -45,6 +45,12 @@ export default function Weather(props) {
   //   let apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
   //   axios.get(apiUrl).then(handleResponse);
   // }
+
+    function search() {
+    let apiKey = "244c95t3fo3db4e37613c8eecb30fba3";
+    let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${longitude}&lat=${latitude}&key=${apiKey}`;
+    axios.get(apiUrl).then(handleResponse);
+  }
 
   if (weatherData.ready) {
     return (
@@ -78,4 +84,3 @@ export default function Weather(props) {
     search();
     return "Loading...";
   }
-}
