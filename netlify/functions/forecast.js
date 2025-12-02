@@ -1,9 +1,5 @@
 // netlify/functions/forecast.js
 
-// Динамічний імпорт node-fetch (сумісний з CommonJS)
-const fetch = (...args) =>
-    import("node-fetch").then(({ default: fetch }) => fetch(...args));
-
 export async function handler(event) {
     const lat = event.queryStringParameters.lat;
     const lon = event.queryStringParameters.lon;
@@ -20,7 +16,7 @@ export async function handler(event) {
     const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
 
     try {
-        const response = await fetch(apiUrl);
+        const response = await fetch(apiUrl); // глобальний fetch
         const data = await response.json();
 
         return {

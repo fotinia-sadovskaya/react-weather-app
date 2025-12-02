@@ -1,9 +1,5 @@
 // netlify/functions/weather.js
 
-// Динамічний імпорт node-fetch (сумісний з CommonJS)
-const fetch = (...args) =>
-    import("node-fetch").then(({ default: fetch }) => fetch(...args));
-
 export async function handler(event) {
     const city = event.queryStringParameters.city || "Burgas";
     const apiKey = process.env.OPENWEATHER_KEY; // ключ зберігається у Netlify Environment Variables
@@ -12,7 +8,7 @@ export async function handler(event) {
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
 
     try {
-        const response = await fetch(apiUrl);
+        const response = await fetch(apiUrl); // глобальний fetch у Node 18+
         const data = await response.json();
 
         return {
