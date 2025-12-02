@@ -27,3 +27,6 @@ yarn-error.log*
 
 # Технічний файл для git-filter-repo
 replace.txt
+
+# Local Netlify folder
+.netlify

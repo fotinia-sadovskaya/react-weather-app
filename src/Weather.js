@@ -37,12 +37,14 @@ export default function Weather(props) {
   }
 
   function search() {
-    const apiKey = "c02a7811347671aa5d99a33a22d9ee93";
-    const units = "metric";
-    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
-    axios.get(apiUrl).then(handleResponse).catch((error) => {
-      console.error("Weather API error:", error);
-    });
+    // Виклик через Netlify Function-проксі
+    const apiUrl = `/.netlify/functions/weather?city=${city}`;
+    axios
+      .get(apiUrl)
+      .then(handleResponse)
+      .catch((error) => {
+        console.error("Weather API error:", error);
+      });
   }
 
   if (weatherData.loaded) {
