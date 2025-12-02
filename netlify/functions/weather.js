@@ -1,5 +1,8 @@
 // netlify/functions/weather.js
-import fetch from "node-fetch";
+
+// Динамічний імпорт node-fetch (сумісний з CommonJS)
+const fetch = (...args) =>
+    import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
 export async function handler(event) {
     const city = event.queryStringParameters.city || "Burgas";
@@ -19,7 +22,10 @@ export async function handler(event) {
     } catch (error) {
         return {
             statusCode: 500,
-            body: JSON.stringify({ error: "Weather API error", details: error.message }),
+            body: JSON.stringify({
+                error: "Weather API error",
+                details: error.message,
+            }),
         };
     }
 }

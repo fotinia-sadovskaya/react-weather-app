@@ -1,10 +1,13 @@
 // netlify/functions/forecast.js
-import fetch from "node-fetch";
+
+// Динамічний імпорт node-fetch (сумісний з CommonJS)
+const fetch = (...args) =>
+    import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
 export async function handler(event) {
     const lat = event.queryStringParameters.lat;
     const lon = event.queryStringParameters.lon;
-    const apiKey = process.env.OPENWEATHER_KEY; // ключ зберігається у Netlify Environment Variables
+    const apiKey = process.env.OPENWEATHER_KEY;
     const units = "metric";
 
     if (!lat || !lon) {
@@ -18,9 +21,6 @@ export async function handler(event) {
 
     try {
         const response = await fetch(apiUrl);
-        if (!response.ok) {
-            throw new Error(`OpenWeatherMap error: ${response.statusText}`);
-        }
         const data = await response.json();
 
         return {
